@@ -1,0 +1,17 @@
+
+<form id="add_reason_form" action="<?php echo $this->getUrl('exercice_contactmanagement/reason/add'); ?>" method="post">
+    <input name="form_key" type="hidden" value="<?php echo $this->getFormKey(); ?>"/>
+    <div class="admin__field">
+        <label for="reason" class="admin__field-label">
+            <?php echo __('Nouvelle raison de contact') ?>
+        </label>
+        <div class="admin__field-control">
+            <input id="reason" name="new_reason" type="text" class="admin__control-text" required>
+        </div>
+    </div>
+    <div class="admin__field">
+        <button type="submit" class="action-default scalable save primary">
+            <span><?php echo __('Ajouter') ?></span>
+        </button>
+    </div>
+</form>

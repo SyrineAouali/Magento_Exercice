@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="exercice_contactmanagement" frontName="exercice_contactmanagement">
+            <module name="Exercice_ContactManagement" before="Magento_Backend" />
+        </route>
+        <route id="customer_contact" frontName="customer_contact">
+            <module name="Exercice_ContactManagement" before="Magento_Backend" />
+        </route>
+        <route id="contactmanagement" frontName="contactmanagement">
+        <module name="Exercice_ContactManagement" before="Magento_Backend" />
+        </route>
+
+    </router>
+</config>

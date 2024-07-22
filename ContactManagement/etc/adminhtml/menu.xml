@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Adminhtml/etc/menu.xsd">
+    <menu>
+        <add id="Exercice_ContactManagement::reason"
+             title="Manage Contact Reasons"
+             module="Exercice_ContactManagement"
+             sortOrder="100"
+             action="contactmanagement/reason"
+             resource="Exercice_ContactManagement::add_reason"/>
+        <add id="Exercice_ContactManagement::contact_management" title="Contact Management" module="Exercice_ContactManagement" sortOrder="100" resource="Exercice_ContactManagement::contact_management" />
+        <add id="Exercice_ContactManagement::customercontact" title="Manage Customer Contacts" module="Exercice_ContactManagement" sortOrder="10" parent="Exercice_ContactManagement::contact_management" action="customer_contact/customercontact" resource="Exercice_ContactManagement::customer_contact" />
+
+    </menu>
+</config>
+
+

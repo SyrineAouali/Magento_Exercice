@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="customer_contact" resource="default" engine="innodb" comment="Customer Contact Table">
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Customer ID"/>
+        <column xsi:type="varchar" name="customer_name" length="255" nullable="false" comment="Customer Name"/>
+        <column xsi:type="varchar" name="customer_mail" length="255" nullable="false" comment="Customer Email"/>
+        <column xsi:type="varchar" name="customer_phone_number" length="255" nullable="false" comment="Customer Phone Number"/>
+        <column xsi:type="text" name="contact_reason" nullable="false" comment="Contact Reason"/>
+        <column xsi:type="text" name="contact_request" nullable="false" comment="Contact Request"/>
+        <column xsi:type="text" name="contact_response" nullable="true" comment="Contact Response"/>
+        <column xsi:type="timestamp" name="contact_creation_at" nullable="false" on_update="false" default="CURRENT_TIMESTAMP" comment="Contact Creation Date"/>
+        <column xsi:type="timestamp" name="contact_updated_at" nullable="false" on_update="true" default="CURRENT_TIMESTAMP" comment="Contact Update Date"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="customer_id"/>
+        </constraint>
+    </table>
+</schema>

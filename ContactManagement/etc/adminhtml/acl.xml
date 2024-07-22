@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Exercice_ContactManagement::reason" title="Reasons" sortOrder="10">
+                    <resource id="Exercice_ContactManagement::reason_save" title="Save Reason" sortOrder="10" />
+                </resource>
+            <resource id="Exercice_ContactManagement::contact_management" title="Contact Management" sortOrder="100" >
+                <resource id="Exercice_ContactManagement::customercontact" title="Manage Customer Contacts" sortOrder="10">
+                    <resource id="Exercice_ContactManagement::customercontact_save" title="Add Customer Contact" sortOrder="10" />
+                    <resource id="Exercice_ContactManagement::customercontact_delete" title="Delete Customer Contact" sortOrder="20" />
+                </resource>
+            </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>
+

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">customer_contact_listing.customer_contact_listing_data_source</item>
+
+            <item name="deps" xsi:type="string">customer_contact_listing.customer_contact_listing_data_source</item>
+        </item>
+
+        <item name="spinner" xsi:type="string">customer_contact_columns</item>
+
+
+    </argument>
+
+    <dataSource name="customer_contact_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">CustomerContactGridDataProvider</argument> <!-- Data provider class -->
+            <argument name="name" xsi:type="string">customer_contact_listing_data_source</argument> <!-- provider defined above -->
+            <argument name="primaryFieldName" xsi:type="string">customer_id</argument> <!-- Primary key -->
+            <argument name="requestFieldName" xsi:type="string">id</argument> <!-- URL name parameter -->
+
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <!-- Primary key column name -->
+                        <item name="indexField" xsi:type="string">customer_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <container name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="template" xsi:type="string">ui/grid/toolbar</item>
+            </item>
+        </argument>
+        <bookmark name="bookmarks">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/bookmarks/bookmarks</item>
+                    <item name="displayArea" xsi:type="string">dataGridActions</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="saveUrl" xsi:type="url" path="mui/bookmark/save"/>
+                        <item name="deleteUrl" xsi:type="url" path="mui/bookmark/delete"/>
+                        <item name="namespace" xsi:type="string">customer_contact_listing</item>
+                    </item>
+                </item>
+            </argument>
+        </bookmark>
+        <container name="columns_controls">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsData" xsi:type="array">
+                        <item name="provider" xsi:type="string">customer_contact_listing.customer_contact_listing.customer_contact_columns</item>
+                    </item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
+                    <item name="displayArea" xsi:type="string">dataGridActions</item>
+                </item>
+            </argument>
+        </container>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">customer_contact_listing.customer_contact_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.filters</item>
+                    </item>
+                    <item name="childDefaults" xsi:type="array">
+                        <item name="provider" xsi:type="string">customer_contact_listing.customer_contact_listing.listing_top.listing_filters</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">customer_contact_listing.customer_contact_listing.listing_top.bookmarks:current.columns.${ $.index }.visible</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <filterRange name="customer_id">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataScope" xsi:type="string">customer_id</item> <!-- Column name in DB -->
+                        <item name="label" xsi:type="string" translate="true">ID</item> <!-- Label on grid -->
+                        <item name="childDefaults" xsi:type="array">
+                            <item name="provider" xsi:type="string">customer_contact_listing.customer_contact_listing.listing_top.listing_filters</item>
+                        </item>
+                    </item>
+                </argument>
+                <filterInput name="from">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataScope" xsi:type="string">from</item>
+                            <item name="label" xsi:type="string" translate="true">from</item>
+                            <item name="placeholder" xsi:type="string" translate="true">From</item>
+                        </item>
+                    </argument>
+                </filterInput>
+                <filterInput name="to">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataScope" xsi:type="string">to</item>
+                            <item name="label" xsi:type="string" translate="true">to</item>
+                            <item name="placeholder" xsi:type="string" translate="true">To</item>
+                        </item>
+                    </argument>
+                </filterInput>
+            </filterRange>
+            <filterInput name="customer_name">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataScope" xsi:type="string">customer_name</item>
+                        <item name="label" xsi:type="string" translate="true">Customer Name</item>
+                    </item>
+                </argument>
+            </filterInput>
+        </filters>
+        <filterSearch name="fulltext">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="provider" xsi:type="string">customer_contact_listing.customer_contact_listing_data_source</item>
+                    <item name="chipsProvider" xsi:type="string">customer_contact_listing.customer_contact_listing.listing_top.listing_filters_chips</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">customer_contact_listing.customer_contact_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.search</item>
+                    </item>
+                </item>
+            </argument>
+        </filterSearch>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">customer_contact_listing.customer_contact_listing.customer_contact_columns.ids</item>
+                    <item name="indexField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="customer_contact/customercontact/delete"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete items</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+    </container>
+    <columns name="customer_contact_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">55</item>
+                    <item name="indexField" xsi:type="string">customer_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="customer_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">ID</item>
+                </item>
+            </argument>
+        </column>
+        <column name="customer_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Customer Name</item>
+                </item>
+            </argument>
+        </column>
+        <column name="customer_mail">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Customer Mail</item>
+                </item>
+            </argument>
+        </column>
+        <column name="customer_phone_number">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Customer Phone Number</item>
+                </item>
+            </argument>
+        </column>
+
+
+        <column name="contact_reason">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Contact Reason</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="contact_request">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Contact Request</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="contact_response">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Contact Response</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="contact_creation_at">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Contact Creation Time</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="contact_updated_at">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Contact Update Time</item>
+                </item>
+            </argument>
+        </column>
+        <actionsColumn name="actions" class="Exercice\ContactManagement\Ui\Component\Listing\Column\CustomerContactActions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">107</item>
+                    <item name="indexField" xsi:type="string">customer_id</item>
+
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+    <!--
+    <columns name="customer_contact_columns">
+        <column name="reason" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Reason</label>
+                <options
+                    class="\Exercice\ContactManagement\Model\ReasonOptionsProvider"/>
+            </settings>
+        </column>
+    </columns> -->
+</listing>

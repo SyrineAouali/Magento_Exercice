@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Exercice\ContactManagement\Api\Data\CustomerContactInterface" type="Exercice\ContactManagement\Model\CustomerContact"/>
+    <preference for="Exercice\ContactManagement\Api\ContactManagementInterface" type="Exercice\ContactManagement\Model\ContactManagement" />
+
+    <virtualType name="CustomerContactGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Exercice\ContactManagement\Model\Resource\CustomerContact\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">CustomerContactGridFilterPool</argument> <!-- Define new object for filters -->
+        </arguments>
+    </virtualType>
+
+    <virtualType name="CustomerContactGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="customer_contact_listing_data_source" xsi:type="string">Exercice\ContactManagement\Model\ResourceModel\Grid\CustomerContact\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+
+    <virtualType name="Exercice\ContactManagement\Model\ResourceModel\Grid\CustomerContact\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">customer_contact</argument>
+            <argument name="resourceModel" xsi:type="string">Exercice\ContactManagement\Model\ResourceModel\CustomerContact</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="ReasonGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Exercice\ContactManagement\Model\Resource\Reason\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">ReasonGridFilterPool</argument> <!-- Define new object for filters -->
+        </arguments>
+    </virtualType>
+
+
+    <virtualType name="ReasonGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="contactmanagement_reason_listing_data_source" xsi:type="string">Exercice\ContactManagement\Model\ResourceModel\Grid\Reason\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Exercice\ContactManagement\Model\ResourceModel\Grid\Reason\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">exercice_contactmanagement_customer_reason</argument>
+            <argument name="resourceModel" xsi:type="string">Exercice\ContactManagement\Model\ResourceModel\Reason</argument>
+        </arguments>
+    </virtualType>
+</config>

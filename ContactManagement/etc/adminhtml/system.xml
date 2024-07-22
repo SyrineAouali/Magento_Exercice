@@ -1,0 +1,17 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/system_file.xsd">
+    <system>
+        <section id="contact" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Contact</label>
+            <tab>general</tab>
+            <resource>Exercice_ContactManagement::config_contact</resource>
+            <group id="contact_reasons" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1"  >
+                <label>Motifs de contact</label>
+                <field id="reasons_list" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1" >
+                    <label>Motifs de contact</label>
+                    <source_model>Exercice\ContactManagement\Model\Config\Source\ReasonOptions</source_model>
+                    <comment><![CDATA[Pour ajouter une nouvelle raison, veuillez naviguer vers la section "Ajouter une nouvelle raison" via le menu d'administration.]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
